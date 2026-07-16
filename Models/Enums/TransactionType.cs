@@ -1,4 +1,4 @@
-namespace ControleGastos.Api.models.enums;
+namespace ControleGastos.Api.Models.Enums;
 
 public enum TransactionType
 {

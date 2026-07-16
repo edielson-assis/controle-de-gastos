@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using ControleGastos.Api.models;
+using ControleGastos.Api.Models;
 
-namespace ControleGastos.Api.data;
+namespace ControleGastos.Api.Data;
 
 public class AppDbContext : DbContext
 {

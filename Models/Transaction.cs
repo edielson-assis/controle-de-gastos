@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
-using ControleGastos.Api.models.enums;
+using ControleGastos.Api.Models.Enums;
 
-namespace ControleGastos.Api.models;
+namespace ControleGastos.Api.Models;
 
 [Table("Transactions")]
 public class Transaction

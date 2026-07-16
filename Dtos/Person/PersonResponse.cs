@@ -1,4 +1,4 @@
-namespace ControleGastos.Api.dtos.person;
+namespace ControleGastos.Api.Dtos.Person;
 
 public class PersonResponse
 {

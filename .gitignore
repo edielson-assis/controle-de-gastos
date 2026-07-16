@@ -61,6 +61,8 @@ publish/
 *.tmp
 *.log
 *.bak
+*.db-wal
+*.db-shm
 
 # SQL Server database files
 *.mdf

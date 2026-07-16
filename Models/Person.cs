@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ControleGastos.Api.models;
+namespace ControleGastos.Api.Models;
 
 [Table("People")]
 public class Person

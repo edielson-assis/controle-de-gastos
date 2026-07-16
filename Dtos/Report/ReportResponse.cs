@@ -1,4 +1,4 @@
-namespace ControleGastos.Api.dtos.report;
+namespace ControleGastos.Api.Dtos.Report;
 
 public class ReportResponse
 {

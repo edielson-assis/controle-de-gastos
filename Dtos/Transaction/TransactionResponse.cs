@@ -1,6 +1,6 @@
-using ControleGastos.Api.models.enums;
+using ControleGastos.Api.Models.Enums;
 
-namespace ControleGastos.Api.dtos.transaction;
+namespace ControleGastos.Api.Dtos.Transaction;
 
 public class TransactionResponse
 {
