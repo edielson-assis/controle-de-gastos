@@ -1,6 +1,8 @@
 using ControleGastos.Api.Data;
 using ControleGastos.Api.Repositories;
 using ControleGastos.Api.Repositories.Interfaces;
+using ControleGastos.Api.Services;
+using ControleGastos.Api.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +26,10 @@ using (var scope = app.Services.CreateScope())
 
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+
+builder.Services.AddScoped<IPersonService, PersonService>();
+builder.Services.AddScoped<ITransactionService, TransactionService>();
+builder.Services.AddScoped<IReportService, ReportService>();
 
 app.UseSwagger();
 
