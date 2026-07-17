@@ -22,6 +22,17 @@ builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<ITransactionService, TransactionService>();
 builder.Services.AddScoped<IReportService, ReportService>();
 
+// CORS para o frontend em desenvolvimento
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("FrontendPolicy", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
 // Controllers
 builder.Services.AddControllers();
 
@@ -47,6 +58,8 @@ app.UseExceptionHandler();
 // Pipeline HTTP
 app.UseSwagger();
 app.UseSwaggerUI();
+
+app.UseCors("FrontendPolicy");
 
 app.UseHttpsRedirection();
 
