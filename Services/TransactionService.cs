@@ -1,5 +1,5 @@
 using ControleGastos.Api.Dtos.Transaction;
-using ControleGastos.Api.Models;
+using ControleGastos.Api.Mappers;
 using ControleGastos.Api.Models.Enums;
 using ControleGastos.Api.Repositories.Interfaces;
 using ControleGastos.Api.Services.Interfaces;
@@ -27,48 +27,19 @@ public class TransactionService : ITransactionService
         {
             throw new Exception("Pessoa não encontrada.");
         }
-
         // Menores de 18 anos podem cadastrar somente despesas.
         if (person.Age < 18 && request.Type == TransactionType.Income)
         {
-            throw new Exception(
-                "Menores de idade não podem cadastrar receitas.");
+            throw new Exception("Menores de idade não podem cadastrar receitas.");
         }
-
-        var transaction = new Transaction
-        {
-            Description = request.Description,
-            Amount = request.Amount,
-            Type = request.Type,
-            Person = person
-        };
-
-        var savedTransaction =
-            await _transactionRepository.SaveAsync(transaction);
-
-        return new TransactionResponse
-        {
-            Id = savedTransaction.Id,
-            Description = savedTransaction.Description,
-            Amount = savedTransaction.Amount,
-            Type = savedTransaction.Type,
-            PersonId = savedTransaction.Person.Id
-        };
+        var transaction = TransactionMapper.ToEntity(request, person, request.Type);
+        var savedTransaction = await _transactionRepository.SaveAsync(transaction);
+        return TransactionMapper.ToResponse(savedTransaction);
     }
 
     public async Task<List<TransactionResponse>> FindAllAsync()
     {
-        var transactions =
-            await _transactionRepository.FindAllAsync();
-
-        return transactions.Select(transaction => new TransactionResponse
-        {
-            Id = transaction.Id,
-            Description = transaction.Description,
-            Amount = transaction.Amount,
-            Type = transaction.Type,
-            PersonId = transaction.Person.Id
-
-        }).ToList();
+        var transactions = await _transactionRepository.FindAllAsync();
+        return TransactionMapper.ToResponseList(transactions);
     }
 }
