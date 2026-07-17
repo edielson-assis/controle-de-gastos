@@ -1,4 +1,5 @@
 using ControleGastos.Api.Data;
+using ControleGastos.Api.Exceptions;
 using ControleGastos.Api.Repositories;
 using ControleGastos.Api.Repositories.Interfaces;
 using ControleGastos.Api.Services;
@@ -24,6 +25,10 @@ builder.Services.AddScoped<IReportService, ReportService>();
 // Controllers
 builder.Services.AddControllers();
 
+// GlobalExceptionHandler
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
+
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -38,6 +43,7 @@ using (var scope = app.Services.CreateScope())
     context.Database.EnsureCreated();
 }
 
+app.UseExceptionHandler();
 // Pipeline HTTP
 app.UseSwagger();
 app.UseSwaggerUI();
