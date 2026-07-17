@@ -1,4 +1,5 @@
 using ControleGastos.Api.Dtos.Transaction;
+using ControleGastos.Api.Exceptions;
 using ControleGastos.Api.Mappers;
 using ControleGastos.Api.Models.Enums;
 using ControleGastos.Api.Repositories.Interfaces;
@@ -25,14 +26,22 @@ public class TransactionService : ITransactionService
 
         if (person == null)
         {
-            throw new Exception("Pessoa não encontrada.");
+            throw new ResourceNotFoundException($"Pessoa com id {request.PersonId} não encontrada.");
+        }
+
+        if (!Enum.TryParse<TransactionType>(
+            request.Type,
+            true,
+            out var transactionType))
+        {
+            throw new BusinessException("Tipo de transação inválido.");
         }
         // Menores de 18 anos podem cadastrar somente despesas.
-        if (person.Age < 18 && request.Type == TransactionType.Income)
+        if (person.Age < 18 && transactionType == TransactionType.Income)
         {
-            throw new Exception("Menores de idade não podem cadastrar receitas.");
+            throw new BusinessException("Menores de idade não podem cadastrar receitas.");
         }
-        var transaction = TransactionMapper.ToEntity(request, person, request.Type);
+        var transaction = TransactionMapper.ToEntity(request, person, transactionType);
         var savedTransaction = await _transactionRepository.SaveAsync(transaction);
         return TransactionMapper.ToResponse(savedTransaction);
     }

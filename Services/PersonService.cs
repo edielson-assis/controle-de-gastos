@@ -1,4 +1,5 @@
 using ControleGastos.Api.Dtos.Person;
+using ControleGastos.Api.Exceptions;
 using ControleGastos.Api.Mappers;
 using ControleGastos.Api.Models;
 using ControleGastos.Api.Repositories.Interfaces;
@@ -33,7 +34,7 @@ public class PersonService : IPersonService
         var person = await _personRepository.FindByIdAsync(id);
         if (person == null)
         {
-            throw new Exception("Pessoa não encontrada.");
+            throw new ResourceNotFoundException($"Pessoa com id {id} não encontrada.");
         }
         await _personRepository.DeleteAsync(person);
     }

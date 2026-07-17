@@ -1,5 +1,3 @@
-using ControleGastos.Api.Models.Enums;
-
 namespace ControleGastos.Api.Dtos.Transaction;
 
 public class TransactionResponse
@@ -10,7 +8,7 @@ public class TransactionResponse
 
     public decimal Amount { get; set; }
 
-    public TransactionType Type { get; set; }
+    public string Type { get; set; } = string.Empty;
 
     public long PersonId { get; set; }
 }

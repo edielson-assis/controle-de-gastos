@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using ControleGastos.Api.Models.Enums;
 
 namespace ControleGastos.Api.Dtos.Transaction;
 
@@ -13,8 +12,9 @@ public class TransactionRequest
     public decimal Amount { get; set; }
 
     [Required(ErrorMessage = "O tipo da transação é obrigatório.")]
-    public TransactionType Type { get; set; }
+    public string Type { get; set; } = string.Empty;
 
+    [Range(1, long.MaxValue)]
     [Required(ErrorMessage = "O identificador da pessoa é obrigatório.")]
     public long PersonId { get; set; }
 }

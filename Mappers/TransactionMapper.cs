@@ -27,7 +27,7 @@ public static class TransactionMapper
             Id = transaction.Id,
             Description = transaction.Description,
             Amount = transaction.Amount,
-            Type = transaction.Type,
+            Type = transaction.Type.ToString(),
             PersonId = transaction.Person.Id
         };
     }
