@@ -1,7 +1,9 @@
+import Header from "../components/Header/Header";
+
 function Home() {
     return (
         <>
-            <h1>Controle de Gastos</h1>
+            <Header />
         </>
     );
 }
