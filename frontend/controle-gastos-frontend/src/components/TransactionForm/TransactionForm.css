@@ -15,6 +15,6 @@
 }
 
 .error {
-    color: #dc2626;
     font-size: 0.9rem;
+    color: var(--danger-color)
 }

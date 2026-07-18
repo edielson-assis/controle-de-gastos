@@ -12,3 +12,8 @@
     padding: 0.75rem;
     cursor: pointer;
 }
+
+.error {
+    font-size: 0.9rem;
+    color: var(--danger-color)
+}

@@ -11,10 +11,30 @@ function PersonForm({ onPersonCreated }: PersonFormProps) {
 
     const [name, setName] = useState("");
     const [age, setAge] = useState<number>(0);
+    const [errors, setErrors] = useState({name: ""});
+
+    function validateForm(): boolean {
+
+        const newErrors = {name: ""};
+
+        if (!name.trim()) {
+            newErrors.name = "Informe um nome.";
+        }
+
+        setErrors(newErrors);
+
+        return !(
+            newErrors.name
+        );
+    }
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 
         event.preventDefault();
+
+        if (!validateForm()) {
+            return;
+        }
 
         const request: PersonRequest = {
             name,
@@ -39,8 +59,17 @@ function PersonForm({ onPersonCreated }: PersonFormProps) {
                 type="text"
                 placeholder="Nome"
                 value={name}
+                required
+                maxLength={100}
                 onChange={(e) => setName(e.target.value)}
             />
+
+            {errors.name && (
+
+                <span className="error">
+                    {errors.name}
+                </span>
+            )}
 
             <input
                 type="number"
