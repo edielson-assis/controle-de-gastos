@@ -1,0 +1,24 @@
+.person-list {
+    width: 600px;
+    margin: 2rem auto;
+}
+
+.person-list h2 {
+    margin-bottom: 1rem;
+}
+
+.person-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.person-list th,
+.person-list td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.person-list th {
+    background-color: #f5f5f5;
+}
