@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 import PersonForm from "../components/PersonForm/PersonForm";
 import PersonList from "../components/PersonList/PersonList";
+import TransactionForm from "../components/TransactionForm/TransactionForm";
 
 import type { PersonResponse } from "../types/Person";
 import { findAllPersons } from "../services/PersonService";
@@ -38,6 +39,11 @@ function Home() {
                 persons={persons}
                 loading={loading}
                 onPersonDeleted={loadPersons}
+            />
+
+            <TransactionForm
+                persons={persons}
+                onTransactionCreated={async () => {}}
             />
         </>
     );
