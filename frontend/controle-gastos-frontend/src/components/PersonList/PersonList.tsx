@@ -4,10 +4,15 @@ import "./PersonList.css";
 
 type PersonListProps = {
     persons: PersonResponse[];
+    loading: boolean;
     onPersonDeleted: () => Promise<void>;
 };
 
-function PersonList({ persons, onPersonDeleted }: PersonListProps) {
+function PersonList({
+        persons,
+        loading,
+        onPersonDeleted
+    }: PersonListProps) {
 
     async function handleDelete(id: number) {
 
@@ -21,6 +26,23 @@ function PersonList({ persons, onPersonDeleted }: PersonListProps) {
 
         await deletePerson(id);
         await onPersonDeleted();;
+    }
+
+    if (loading) {
+        return (
+            <div className="person-list">
+                <p>Carregando pessoas...</p>
+            </div>
+        );
+    }
+
+    if (persons.length === 0) {
+        return (
+            <div className="person-list">
+                <h2>Pessoas Cadastradas</h2>
+                <p>Nenhuma pessoa cadastrada.</p>
+            </div>
+        );
     }
 
     return (

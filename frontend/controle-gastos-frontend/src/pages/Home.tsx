@@ -10,14 +10,20 @@ import { findAllPersons } from "../services/PersonService";
 function Home() {
 
     const [persons, setPersons] = useState<PersonResponse[]>([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         loadPersons();
     }, []);
 
     async function loadPersons() {
-        const response = await findAllPersons();
-        setPersons(response);
+        setLoading(true);
+        try {
+            const response = await findAllPersons();
+            setPersons(response);
+        } finally {
+            setLoading(false);
+        }
     }
 
     return (
@@ -30,6 +36,7 @@ function Home() {
 
             <PersonList
                 persons={persons}
+                loading={loading}
                 onPersonDeleted={loadPersons}
             />
         </>
