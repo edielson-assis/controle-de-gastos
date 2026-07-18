@@ -1,21 +1,13 @@
-import { useEffect, useState } from "react";
-// import { findAllPersons } from "../../services/PersonService";
 import type { PersonResponse } from "../../types/Person";
-import { deletePerson, findAllPersons } from "../../services/PersonService";
+import { deletePerson } from "../../services/PersonService";
 import "./PersonList.css";
 
-function PersonList() {
+type PersonListProps = {
+    persons: PersonResponse[];
+    onPersonDeleted: () => Promise<void>;
+};
 
-    const [persons, setPersons] = useState<PersonResponse[]>([]);
-
-    useEffect(() => {
-        loadPersons();
-    }, []);
-
-    async function loadPersons() {
-        const response = await findAllPersons();
-        setPersons(response);
-    }
+function PersonList({ persons, onPersonDeleted }: PersonListProps) {
 
     async function handleDelete(id: number) {
 
@@ -28,8 +20,7 @@ function PersonList() {
         }
 
         await deletePerson(id);
-
-        await loadPersons();
+        await onPersonDeleted();;
     }
 
     return (

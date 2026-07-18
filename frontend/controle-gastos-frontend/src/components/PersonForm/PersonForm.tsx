@@ -3,14 +3,16 @@ import { createPerson } from "../../services/PersonService";
 import type { PersonRequest } from "../../types/Person";
 import "./PersonForm.css";
 
-function PersonForm() {
+type PersonFormProps = {
+    onPersonCreated: () => Promise<void>;
+};
+
+function PersonForm({ onPersonCreated }: PersonFormProps) {
 
     const [name, setName] = useState("");
     const [age, setAge] = useState<number>(0);
 
-    async function handleSubmit(
-        event: React.FormEvent<HTMLFormElement>
-    ) {
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 
         event.preventDefault();
 
@@ -20,6 +22,7 @@ function PersonForm() {
         };
 
         await createPerson(request);
+        await onPersonCreated();
 
         setName("");
         setAge(0);
