@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { findAllPersons } from "../../services/PersonService";
+// import { findAllPersons } from "../../services/PersonService";
 import type { PersonResponse } from "../../types/Person";
+import { deletePerson, findAllPersons } from "../../services/PersonService";
 import "./PersonList.css";
 
 function PersonList() {
@@ -16,6 +17,21 @@ function PersonList() {
         setPersons(response);
     }
 
+    async function handleDelete(id: number) {
+
+        const confirmed = window.confirm(
+            "Deseja realmente excluir esta pessoa?"
+        );
+
+        if (!confirmed) {
+            return;
+        }
+
+        await deletePerson(id);
+
+        await loadPersons();
+    }
+
     return (
         <div className="person-list">
 
@@ -28,6 +44,7 @@ function PersonList() {
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Idade</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
 
@@ -39,6 +56,15 @@ function PersonList() {
                             <td>{person.id}</td>
                             <td>{person.name}</td>
                             <td>{person.age}</td>
+
+                            <td>
+
+                                <button onClick={() => handleDelete(person.id)}>
+                                    Excluir
+                                </button>
+
+                            </td>
+
                         </tr>
 
                     ))}

@@ -22,3 +22,8 @@
 .person-list th {
     background-color: #f5f5f5;
 }
+
+.person-list button {
+    cursor: pointer;
+    padding: 6px 12px;
+}
