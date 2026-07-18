@@ -8,6 +8,8 @@ import TransactionForm from "../components/TransactionForm/TransactionForm";
 import type { PersonResponse } from "../types/Person";
 import { findAllPersons } from "../services/PersonService";
 
+import "./Home.css";
+
 function Home() {
 
     const [persons, setPersons] = useState<PersonResponse[]>([]);
@@ -28,24 +30,44 @@ function Home() {
     }
 
     return (
-        <>
+
+        <div className="container">
+
             <Header />
 
-            <PersonForm
-                onPersonCreated={loadPersons}
-            />
+            <div className="forms">
+                <div className="card">
+                    <PersonForm
+                        onPersonCreated={loadPersons}
+                    />
+                </div>
 
-            <PersonList
-                persons={persons}
-                loading={loading}
-                onPersonDeleted={loadPersons}
-            />
+                <div className="card">
+                    <TransactionForm
+                        persons={persons}
+                        onTransactionCreated={async () => {}}
+                    />
+                </div>
+            </div>
 
-            <TransactionForm
-                persons={persons}
-                onTransactionCreated={async () => {}}
-            />
-        </>
+            <div className="card">
+                <PersonList
+                    persons={persons}
+                    loading={loading}
+                    onPersonDeleted={loadPersons}
+                />
+            </div>
+
+            <div className="card">
+                <h2>Transações</h2>
+                <p>Em desenvolvimento...</p>
+            </div>
+
+            <div className="card">
+                <h2>Relatório Geral</h2>
+                <p>Em desenvolvimento...</p>
+            </div>
+        </div>
     );
 }
 
