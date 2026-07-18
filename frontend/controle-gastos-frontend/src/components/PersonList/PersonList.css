@@ -20,7 +20,8 @@
 }
 
 .person-list th {
-    background-color: #f5f5f5;
+    background-color: var(--primary-color);
+    color: white;
 }
 
 .person-list button {

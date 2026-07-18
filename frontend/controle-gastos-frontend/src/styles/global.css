@@ -1,0 +1,16 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+button {
+    cursor: pointer;
+    border: none;
+}
+
+input,
+select,
+button {
+    font-size: 1rem;
+}
