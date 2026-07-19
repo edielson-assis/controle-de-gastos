@@ -3,6 +3,7 @@ import { createTransaction } from "../../services/TransactionService";
 import type { PersonResponse } from "../../types/Person";
 import type { TransactionRequest } from "../../types/Transaction";
 import Message from "../Message/Message";
+import Button from "../Button/Button";
 import "./TransactionForm.css";
 
 type TransactionFormProps = {
@@ -187,9 +188,9 @@ function TransactionForm({
                 </span>
             )}
 
-            <button type="submit">
+            <Button type="submit">
                 Cadastrar
-            </button>
+            </Button>
 
             {successMessage && (
                 <Message

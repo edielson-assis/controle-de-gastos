@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createPerson } from "../../services/PersonService";
 import type { PersonRequest } from "../../types/Person";
 import Message from "../Message/Message";
+import Button from "../Button/Button";
 import "./PersonForm.css";
 
 type PersonFormProps = {
@@ -86,9 +87,9 @@ function PersonForm({ onPersonCreated }: PersonFormProps) {
                 onChange={(e) => setAge(Number(e.target.value))}
             />
 
-            <button type="submit">
+            <Button type="submit">
                 Cadastrar
-            </button>
+            </Button>
 
             {successMessage && (
                 <Message

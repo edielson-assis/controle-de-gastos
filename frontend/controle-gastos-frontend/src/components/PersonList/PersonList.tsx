@@ -1,5 +1,6 @@
 import type { PersonResponse } from "../../types/Person";
 import { deletePerson } from "../../services/PersonService";
+import Button from "../Button/Button";
 import "./PersonList.css";
 
 type PersonListProps = {
@@ -85,9 +86,9 @@ function PersonList({
 
                             <td>
 
-                                <button onClick={() => handleDelete(person.id)}>
+                                <Button variant="danger" onClick={() => handleDelete(person.id)}>
                                     Excluir
-                                </button>
+                                </Button>
 
                             </td>
 
