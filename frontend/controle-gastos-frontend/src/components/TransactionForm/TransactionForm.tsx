@@ -86,7 +86,7 @@ function TransactionForm({
             className="transaction-form"
         >
 
-            <h2>Cadastro de Transação</h2>
+            <h2 className="section-title">Cadastro de Transação</h2>
 
             <input
                 type="text"

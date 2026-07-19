@@ -1,0 +1,35 @@
+.report-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-lg);
+}
+
+.summary-card {
+    background: var(--card-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-lg);
+    text-align: center;
+}
+
+.summary-card h3 {
+    margin-bottom: var(--spacing-md);
+    color: var(--text-light);
+}
+
+.summary-card span {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
+.income span {
+    color: var(--success-color);
+}
+
+.expense span {
+    color: var(--danger-color);
+}
+
+.balance span {
+    color: var(--primary-color);
+}

@@ -1,9 +1,10 @@
 import { api } from "./Api";
-import type { Report } from "../types/Report";
+import type { ReportResponse } from "../types/Report";
 
-export async function generateReport(): Promise<Report> {
+export async function getReport(): Promise<ReportResponse> {
 
-    const response = await api.get<Report>("/report");
-
+    const response = await api.get<ReportResponse>(
+        "/report"
+    );
     return response.data;
 }

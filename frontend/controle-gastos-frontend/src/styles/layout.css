@@ -10,3 +10,10 @@
     box-shadow: var(--shadow-sm);
     padding: var(--spacing-lg);
 }
+
+.section-title {
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+}

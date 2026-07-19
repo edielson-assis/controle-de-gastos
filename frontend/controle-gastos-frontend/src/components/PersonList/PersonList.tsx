@@ -5,12 +5,14 @@ import "./PersonList.css";
 type PersonListProps = {
     persons: PersonResponse[];
     loading: boolean;
+    error: string | null;
     onPersonDeleted: () => Promise<void>;
 };
 
 function PersonList({
         persons,
         loading,
+        error,
         onPersonDeleted
     }: PersonListProps) {
 
@@ -36,10 +38,21 @@ function PersonList({
         );
     }
 
+    if (error) {
+
+        return (
+
+            <div className="report">
+                <h2 className="section-title">Pessoas Cadastradas</h2>
+                <p>{error}</p>
+            </div>
+        );
+    }
+
     if (persons.length === 0) {
         return (
             <div className="person-list">
-                <h2>Pessoas Cadastradas</h2>
+                <h2 className="section-title">Pessoas Cadastradas</h2>
                 <p>Nenhuma pessoa cadastrada.</p>
             </div>
         );
@@ -48,7 +61,7 @@ function PersonList({
     return (
         <div className="person-list">
 
-            <h2>Pessoas Cadastradas</h2>
+            <h2 className="section-title">Pessoas Cadastradas</h2>
 
             <table>
 

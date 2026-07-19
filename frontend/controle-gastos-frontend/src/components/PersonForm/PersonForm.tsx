@@ -51,7 +51,7 @@ function PersonForm({ onPersonCreated }: PersonFormProps) {
     return (
         <form onSubmit={handleSubmit} className="person-form">
 
-            <h2>Cadastro de Pessoa</h2>
+            <h2 className="section-title">Cadastro de Pessoa</h2>
 
             <input
                 type="text"

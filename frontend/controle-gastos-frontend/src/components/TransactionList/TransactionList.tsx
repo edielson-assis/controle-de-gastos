@@ -1,14 +1,17 @@
 import type { TransactionResponse } from "../../types/Transaction";
+import { formatCurrency } from "../../utils/formatters";
 import "./TransactionList.css";
 
 type TransactionListProps = {
     transactions: TransactionResponse[];
     loading: boolean;
+    error: string | null;
 };
 
 function TransactionList({
     transactions,
-    loading
+    loading,
+    error
 }: TransactionListProps) {
 
     if (loading) {
@@ -19,10 +22,21 @@ function TransactionList({
         );
     }
 
+    if (error) {
+
+        return (
+
+            <div className="report">
+                <h2 className="section-title">Transações Cadastradas</h2>
+                <p>{error}</p>
+            </div>
+        );
+    }
+
     if (transactions.length === 0) {
         return (
             <div className="transaction-list">
-                <h2>Transações Cadastradas</h2>
+                <h2 className="section-title">Transações Cadastradas</h2>
                 <p>Nenhuma transações cadastrada.</p>
             </div>
         );
@@ -42,23 +56,10 @@ function TransactionList({
         }
     }
 
-    function formatCurrency(
-        value: number
-    ): string {
-
-        return new Intl.NumberFormat(
-            "pt-BR",
-            {
-                style: "currency",
-                currency: "BRL"
-            }
-        ).format(value);
-    }
-
     return (
         <div className="transaction-list">
 
-            <h2>Transações Cadastradas</h2>
+            <h2 className="section-title">Transações Cadastradas</h2>
 
             <table>
 

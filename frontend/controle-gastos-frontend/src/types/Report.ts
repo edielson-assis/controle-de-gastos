@@ -1,7 +1,19 @@
-import type { GeneralTotals } from "./GeneralTotals";
-import type { PersonReport } from "./PersonReport";
+export interface GeneralTotalsResponse {
+    summary: GeneralTotalsResponse;
+    totalIncome: number;
+    totalExpense: number;
+    balance: number;
+}
 
-export interface Report {
-    persons: PersonReport[];
-    summary: GeneralTotals;
+export interface PersonReportResponse {
+    personId: number;
+    personName: string;
+    totalIncome: number;
+    totalExpense: number;
+    balance: number;
+}
+
+export interface ReportResponse {
+    persons: PersonReportResponse[];
+    summary: GeneralTotalsResponse;
 }
