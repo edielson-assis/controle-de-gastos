@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { createPerson } from "../../services/PersonService";
 import type { PersonRequest } from "../../types/Person";
+import Message from "../Message/Message";
 import "./PersonForm.css";
 
 type PersonFormProps = {
@@ -11,11 +12,13 @@ function PersonForm({ onPersonCreated }: PersonFormProps) {
 
     const [name, setName] = useState("");
     const [age, setAge] = useState<number>(0);
-    const [errors, setErrors] = useState({name: ""});
+    const [errors, setErrors] = useState({ name: "" });
+    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     function validateForm(): boolean {
 
-        const newErrors = {name: ""};
+        const newErrors = { name: "" };
 
         if (!name.trim()) {
             newErrors.name = "Informe um nome.";
@@ -41,11 +44,18 @@ function PersonForm({ onPersonCreated }: PersonFormProps) {
             age
         };
 
-        await createPerson(request);
-        await onPersonCreated();
+        try {
+            await createPerson(request);
+            await onPersonCreated();
 
-        setName("");
-        setAge(0);
+            setSuccessMessage("Pessoa cadastrada com sucesso!");
+            setErrorMessage("");
+            setName("");
+            setAge(0);
+        } catch {
+            setSuccessMessage("");
+            setErrorMessage("Não foi possível cadastrar a pessoa.");
+        }
     }
 
     return (
@@ -79,6 +89,20 @@ function PersonForm({ onPersonCreated }: PersonFormProps) {
             <button type="submit">
                 Cadastrar
             </button>
+
+            {successMessage && (
+                <Message
+                    type="success"
+                    text={successMessage}
+                />
+            )}
+
+            {errorMessage && (
+                <Message
+                    type="error"
+                    text={errorMessage}
+                />
+            )}
 
         </form>
     );

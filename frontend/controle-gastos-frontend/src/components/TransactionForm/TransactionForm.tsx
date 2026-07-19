@@ -2,6 +2,7 @@ import { useState } from "react";
 import { createTransaction } from "../../services/TransactionService";
 import type { PersonResponse } from "../../types/Person";
 import type { TransactionRequest } from "../../types/Transaction";
+import Message from "../Message/Message";
 import "./TransactionForm.css";
 
 type TransactionFormProps = {
@@ -18,6 +19,8 @@ function TransactionForm({
     const [amount, setAmount] = useState<number>(0);
     const [type, setTransactionType] = useState("Income");
     const [personId, setPersonId] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     const [errors, setErrors] = useState({
         description: "",
         amount: "",
@@ -70,14 +73,24 @@ function TransactionForm({
             personId: Number(personId)
         };
 
-        await createTransaction(request);
+        try {
 
-        await onTransactionCreated();
+            await createTransaction(request);
+            await onTransactionCreated();
 
-        setDescription("");
-        setAmount(0);
-        setTransactionType("Income");
-        setPersonId("");
+            setSuccessMessage("Transação cadastrada com sucesso!");
+            setErrorMessage("");
+            setDescription("");
+            setAmount(0);
+            setTransactionType("Income");
+            setPersonId("");
+        } catch (error: any) {
+            setSuccessMessage("");
+            setErrorMessage(
+                error?.response?.data?.message ??
+                "Erro ao cadastrar transação."
+            );
+        }
     }
 
     return (
@@ -178,6 +191,19 @@ function TransactionForm({
                 Cadastrar
             </button>
 
+            {successMessage && (
+                <Message
+                    type="success"
+                    text={successMessage}
+                />
+            )}
+
+            {errorMessage && (
+                <Message
+                    type="error"
+                    text={errorMessage}
+                />
+            )}
         </form>
     );
 }
