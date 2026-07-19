@@ -2,5 +2,8 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-lg);
+}
+
+.card {
     margin-bottom: var(--spacing-lg);
 }

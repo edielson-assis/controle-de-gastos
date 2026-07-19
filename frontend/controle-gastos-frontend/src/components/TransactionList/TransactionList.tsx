@@ -7,11 +7,11 @@ type TransactionListProps = {
 };
 
 function TransactionList({
-        transactions,
-        loading
-    }: TransactionListProps) {
+    transactions,
+    loading
+}: TransactionListProps) {
 
-        if (loading) {
+    if (loading) {
         return (
             <div className="transaction-list">
                 <p>Carregando transações...</p>
@@ -26,6 +26,33 @@ function TransactionList({
                 <p>Nenhuma transações cadastrada.</p>
             </div>
         );
+    }
+
+    function getTransactionTypeLabel(
+        transactionType: string
+    ): string {
+
+        switch (transactionType) {
+            case "Income":
+                return "Receita";
+            case "Expense":
+                return "Despesa";
+            default:
+                return transactionType;
+        }
+    }
+
+    function formatCurrency(
+        value: number
+    ): string {
+
+        return new Intl.NumberFormat(
+            "pt-BR",
+            {
+                style: "currency",
+                currency: "BRL"
+            }
+        ).format(value);
     }
 
     return (
@@ -52,8 +79,8 @@ function TransactionList({
                         <tr key={transaction.id}>
                             <td>{transaction.id}</td>
                             <td>{transaction.description}</td>
-                            <td>{transaction.amount}</td>
-                            <td>{transaction.type}</td>
+                            <td>{formatCurrency(transaction.amount)}</td>
+                            <td>{getTransactionTypeLabel(transaction.type)}</td>
                             <td>{transaction.personId}</td>
                         </tr>
 
