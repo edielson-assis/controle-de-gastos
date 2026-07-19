@@ -46,8 +46,6 @@ function PersonForm({ onPersonCreated }: PersonFormProps) {
 
         setName("");
         setAge(0);
-
-        alert("Pessoa cadastrada com sucesso!");
     }
 
     return (

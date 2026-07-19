@@ -78,8 +78,6 @@ function TransactionForm({
         setAmount(0);
         setTransactionType("Income");
         setPersonId("");
-
-        alert("Transação cadastrada com sucesso!");
     }
 
     return (

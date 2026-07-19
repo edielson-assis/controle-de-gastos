@@ -1,0 +1,30 @@
+.transaction-list {
+    width: 600px;
+    margin: 2rem auto;
+}
+
+.transaction-list h2 {
+    margin-bottom: 1rem;
+}
+
+.transaction-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.transaction-list th,
+.transaction-list td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.transaction-list th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.transaction-list button {
+    cursor: pointer;
+    padding: 6px 12px;
+}
