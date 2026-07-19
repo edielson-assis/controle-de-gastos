@@ -1,0 +1,37 @@
+.person-report-section {
+
+    margin-top: var(--spacing-xl);
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: var(--spacing-md);
+
+}
+
+.person-report-section h3 {
+
+    color: var(--text-color);
+
+}
+
+.person-report-section label {
+
+    font-weight: 600;
+
+}
+
+.person-report-section select {
+
+    padding: .75rem;
+
+    border-radius: var(--radius-sm);
+
+    border: 1px solid #ccc;
+
+    font-size: 1rem;
+
+    max-width: 300px;
+
+}

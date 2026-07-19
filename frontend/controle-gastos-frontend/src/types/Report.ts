@@ -7,7 +7,7 @@ export interface GeneralTotalsResponse {
 
 export interface PersonReportResponse {
     personId: number;
-    personName: string;
+    name: string;
     totalIncome: number;
     totalExpense: number;
     balance: number;

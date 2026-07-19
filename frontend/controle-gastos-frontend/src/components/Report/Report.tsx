@@ -1,5 +1,9 @@
+import { useEffect, useState } from "react";
+
 import ReportSummary from "../ReportSummary/ReportSummary";
 import type { ReportResponse } from "../../types/Report";
+import PersonReportCard from "../PersonReportCard/PersonReportCard";
+import "./Report.css";
 
 type ReportProps = {
     report: ReportResponse | null;
@@ -12,6 +16,20 @@ function Report({
     loading,
     error
 }: ReportProps) {
+
+    const [selectedPersonId, setSelectedPersonId] = useState<number | null>(null);
+
+    useEffect(() => {
+        if (
+            report &&
+            report.persons.length > 0 &&
+            selectedPersonId === null
+        ) {
+            setSelectedPersonId(
+                report.persons[0].personId
+            );
+        }
+    }, [report, selectedPersonId]);
 
     if (loading) {
         return (
@@ -43,6 +61,12 @@ function Report({
         );
     }
 
+    const selectedPerson =
+        report.persons.find(
+            person =>
+                person.personId === selectedPersonId
+        );
+
     return (
 
         <div className="report">
@@ -53,10 +77,40 @@ function Report({
                 summary={report.summary}
             />
 
-            {/* <PersonReportList
-                persons={report.persons}
-            /> */}
+            <div className="person-report-section">
 
+                <h3>
+                    Relatório por Pessoa
+                </h3>
+
+                <select
+
+                    value={selectedPersonId ?? ""}
+
+                    onChange={(event) =>
+                        setSelectedPersonId(
+                            Number(event.target.value)
+                        )
+                    }
+                >
+                    {report.persons.map(person => (
+
+                        <option
+                            key={person.personId}
+                            value={person.personId}
+                        >
+                            {person.name}
+                        </option>
+                    ))}
+                </select>
+
+                {selectedPerson && (
+
+                    <PersonReportCard
+                        report={selectedPerson}
+                    />
+                )}
+            </div>
         </div>
     );
 }

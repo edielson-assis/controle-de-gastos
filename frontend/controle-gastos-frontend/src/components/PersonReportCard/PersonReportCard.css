@@ -1,0 +1,18 @@
+.person-report-card {
+    background: var(--card-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+.person-report-card h3 {
+    margin-bottom: var(--spacing-md);
+    color: var(--primary-color);
+}
+
+.person-report-values {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
